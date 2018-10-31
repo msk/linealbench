@@ -19,7 +19,7 @@ fn ddot(c: &mut Criterion) {
     let (x_ndarray, y_ndarray) = (x.clone(), y.clone());
 
     let benchmark = ParameterizedBenchmark::new(
-        "RBLAS",
+        "RBLAS (Accelerate)",
         move |b, &i| b.iter(|| rblas::Dot::dot(&x_rblas[..i], &y_rblas[..i])),
         params,
     ).with_function("nalgebra", move |b, &i| {

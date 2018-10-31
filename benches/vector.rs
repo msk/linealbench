@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate criterion;
+extern crate nalgebra;
 extern crate rand;
 
 use criterion::Criterion;
@@ -20,6 +21,10 @@ fn ddot(c: &mut Criterion) {
     c.bench_function("ddot_rblas", move |b| {
         b.iter(|| dot_product_rblas(&xtmp, &ytmp))
     });
+
+    let xtmp = nalgebra::DVector::from_iterator(x.len(), x.iter().cloned());
+    let ytmp = nalgebra::DVector::from_iterator(x.len(), x.iter().cloned());
+    c.bench_function("ddot_nalgebra", move |b| b.iter(|| xtmp.dot(&ytmp)));
 }
 
 criterion_group!(vector, ddot);

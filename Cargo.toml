@@ -8,6 +8,7 @@ authors = ["Min Kim <msk@dolbo.net>"]
 [dev-dependencies]
 criterion = "0.2"
 nalgebra = "0.16"
+ndarray = "0.12"
 rand = "0.5"
 rblas = "0.0"
 

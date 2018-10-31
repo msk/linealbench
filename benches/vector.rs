@@ -7,10 +7,6 @@ use criterion::Criterion;
 use rand::distributions::Standard;
 use rand::{IsaacRng, Rng, SeedableRng};
 
-fn dot_product_rblas(x: &[f64], y: &[f64]) -> f64 {
-    rblas::Dot::dot(x, y)
-}
-
 fn ddot(c: &mut Criterion) {
     let mut rng: IsaacRng = SeedableRng::from_seed([0u8; 32]);
     let x: Vec<f64> = rng.sample_iter(&Standard).take(1000).collect();
@@ -19,7 +15,7 @@ fn ddot(c: &mut Criterion) {
     let xtmp = x.clone();
     let ytmp = y.clone();
     c.bench_function("ddot_rblas", move |b| {
-        b.iter(|| dot_product_rblas(&xtmp, &ytmp))
+        b.iter(|| rblas::Dot::dot(&xtmp, &ytmp))
     });
 
     let xtmp = nalgebra::DVector::from_iterator(x.len(), x.iter().cloned());

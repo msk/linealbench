@@ -1,5 +1,6 @@
 #[macro_use]
 extern crate criterion;
+extern crate lineal;
 extern crate nalgebra;
 extern crate ndarray;
 extern crate rand;
@@ -17,6 +18,7 @@ fn ddot(c: &mut Criterion) {
     let (x_rblas, y_rblas) = (x.clone(), y.clone());
     let (x_nalgebra, y_nalgebra) = (x.clone(), y.clone());
     let (x_ndarray, y_ndarray) = (x.clone(), y.clone());
+    let (x_lineal, y_lineal) = (x.clone(), y.clone());
 
     let benchmark = ParameterizedBenchmark::new(
         "RBLAS (Accelerate)",
@@ -30,6 +32,8 @@ fn ddot(c: &mut Criterion) {
         let x = ndarray::arr1(&x_ndarray[..i]);
         let y = ndarray::arr1(&y_ndarray[..i]);
         b.iter(|| x.dot(&y))
+    }).with_function("Lineal", move |b, &i| {
+        b.iter(|| lineal::dot(&x_lineal[..i], &y_lineal[..i]))
     });
     c.bench("ddot", benchmark);
 }

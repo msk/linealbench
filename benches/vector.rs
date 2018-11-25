@@ -33,7 +33,7 @@ fn ddot(c: &mut Criterion) {
         let y = ndarray::arr1(&y_ndarray[..i]);
         b.iter(|| x.dot(&y))
     }).with_function("Lineal", move |b, &i| {
-        b.iter(|| lineal::dot(&x_lineal[..i], &y_lineal[..i]))
+        b.iter(|| lineal::ddot(&x_lineal[..i], &y_lineal[..i]))
     });
     c.bench("ddot", benchmark);
 }

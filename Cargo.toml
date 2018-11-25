@@ -7,7 +7,7 @@ authors = ["Min Kim <msk@dolbo.net>"]
 
 [dev-dependencies]
 criterion = "0.2"
-lineal = { git = "https://github.com/msk/lineal", rev = "de37ed5" }
+lineal = { git = "https://github.com/msk/lineal", rev = "4d964fa" }
 nalgebra = "0.16"
 ndarray = "0.12"
 rand = "0.6"
